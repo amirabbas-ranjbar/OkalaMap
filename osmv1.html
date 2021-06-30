@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Leaflet</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link type="text/css" rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+    <style>
+        body {
+            margin: 0;
+        }
+
+        html,
+        body,
+        #leaflet {
+            height: 100%
+        }
+    </style>
+</head>
+
+<body>
+    <div id="leaflet"></div>
+    <script src="https://unpkg.com/leaflet/dist/leaflet-src.js"></script>
+
+    <script>
+        const map = new L.Map("leaflet", {
+            layers: [
+                new L.TileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
+                    attribution:
+                        'Map data © <a href="http://openstreetmap.org">OpenStreetMap</a> contributors'
+                })
+            ],
+            center: [35.734189, 51.416646],
+            zoom: 0
+        });
+
+        const polygon = {
+            type: "Polygon",
+            coordinates: [
+                [
+                [51.416646,35.734149],
+                [51.416656,35.734159],
+                [51.416666,35.734169],
+                [51.416676,35.734179],
+                [51.416686,35.734189]
+                   
+                ]
+            ]
+        };
+
+        const layer = L.geoJSON(polygon);
+
+        layer.setStyle({ weight: "12" });
+
+        map.addLayer(layer);
+
+        map.fitBounds(layer.getBounds());
+
+    </script>
+
+</body>
+
+</html>
